@@ -26,7 +26,7 @@ export default function Palindrome() {
   return (
     <div className="bg-slate-500 main flex justify-center items-center capitalize">
       <div className="w-3/4 flex flex-col gap-5">
-        <h1 class="text-3xl font-bold underline text-center text-red-200">check isPalindrome project</h1>
+        <h1 className="text-3xl font-bold underline text-center text-red-200">check isPalindrome project</h1>
 
         <input
           className=" form-control
