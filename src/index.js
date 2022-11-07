@@ -6,12 +6,12 @@ import App from './App';
 
 const root = ReactDOM.createRoot(document.getElementById('root'));
 root.render(
-  <>
+  <div className='capitalize'>
     <BrowserRouter>
       <Routes>
         <Route path='/*' element={<App />}></Route>
       </Routes>
-    </BrowserRouter>  </>
+    </BrowserRouter>  </div>
 );
 
 // If you want to start measuring performance in your app, pass a function
