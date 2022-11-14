@@ -24,7 +24,7 @@ export default function Palindrome() {
     setState({ ...state, result: checktValue(state.inputValue, state.returnValue) });
   };
   return (
-    <div className="bg-slate-500 main flex justify-center items-center capitalize">
+    <div className="bg-slate-500 main flex justify-center items-center ">
       <div className="w-3/4 flex flex-col gap-5">
         <h1 className="text-3xl font-bold underline text-center text-red-200">check isPalindrome project</h1>
 
@@ -45,7 +45,7 @@ export default function Palindrome() {
         m-0
         focus:text-gray-700 focus:bg-white focus:border-blue-600 focus:outline-none"
           onChange={(e) => {
-            setState({ ...state, inputValue: e.target.value, returnValue: reverseStr(e.target.value) });
+            setState({ ...state, inputValue: e.target.value.toLowerCase(), returnValue: reverseStr(e.target.value.toLowerCase()) });
           }}
         />
         <button
@@ -54,9 +54,9 @@ export default function Palindrome() {
         >
           check isPalindrome ?
         </button>
-        <div>input value : {state.inputValue}</div>
-        <div>return value is : {state.returnValue}</div>
-        <div>
+        <div className="lowercase">input value : {state.inputValue.toLowerCase()}</div>
+        <div className="lowercase">return value is : {state.returnValue.toLowerCase()}</div>
+        <div className="lowercase">
           result : <span className="text-red-400"> {state.result}</span>
         </div>
       </div>

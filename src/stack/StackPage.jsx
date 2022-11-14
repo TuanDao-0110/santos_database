@@ -32,14 +32,14 @@ export default function StackPage() {
 
   const addFiFo = () => {
     let temp = { ...state };
-    temp.fifo.stack.push(state.fifo.inputValue);
+    temp.fifo.stack.unshift(state.fifo.inputValue);
     setState(() => {
       return { ...temp };
     });
   };
   const removeFiFo = () => {
     let temp = { ...state };
-    temp.fifo.stack.pop();
+    temp.fifo.stack.shift();
     setState(() => {
       return { ...temp };
     });
@@ -47,11 +47,10 @@ export default function StackPage() {
 
   const addLiFo = () => {
     let temp = { ...state };
-    temp.lifo.stack.unshift(state.lifo.inputValue);
+    temp.lifo.stack.push(state.lifo.inputValue);
     setState(() => {
       return { ...temp };
     });
-    console.log(state);
   };
 
   const removeLiFo = () => {
@@ -65,8 +64,9 @@ export default function StackPage() {
   return (
     <div className="bg-slate-500 main flex flex-col justify-center items-center capitalize">
       <div className="w-3/4 flex flex-col gap-5">
-        <h1 className="text-3xl font-bold underline text-center text-red-200">set up LiFo </h1>
+        <h1 className="text-3xl font-bold underline text-center text-red-200">set up LiFo (last in first out) </h1>
         <input
+        value={state.fifo.inputValue}
           className=" form-control
         block
         w-full
@@ -94,7 +94,7 @@ export default function StackPage() {
           className="inline-block w-fit px-6 py-2.5 bg-blue-600 text-white font-medium text-xs leading-tight uppercase rounded shadow-md hover:bg-blue-700 hover:shadow-lg focus:bg-blue-700 focus:shadow-lg focus:outline-none focus:ring-0 active:bg-blue-800 active:shadow-lg transition duration-150 ease-in-out"
           onClick={() => {
             addFiFo();
-
+            
             setState({ ...state, valueResultFiFo: renderArray(state.fifo.stack) });
           }}
         >
@@ -117,7 +117,7 @@ export default function StackPage() {
       </div>
 
       <div className="w-3/4 flex flex-col gap-5">
-        <h1 className="text-3xl font-bold underline text-center text-red-200">set up FIFO </h1>
+        <h1 className="text-3xl font-bold underline text-center text-red-200">set up FIFO (first in first out) </h1>
 
         <input
           className=" form-control
