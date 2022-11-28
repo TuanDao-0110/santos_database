@@ -2,6 +2,7 @@ import { Route, Routes } from 'react-router-dom';
 import './App.css';
 import Bubblesort from './bubblesort/Bubblesort';
 import Palindrome from './palindrome/Palindrome';
+import SnakeGame from './snakeGame/SnakeGame';
 import StackPage from './stack/StackPage';
 import Template from './template/Template';
 
@@ -13,6 +14,7 @@ function App() {
         <Route path='palidrome' element={<Palindrome></Palindrome>}></Route>
         <Route path='bubblesort' element={<Bubblesort></Bubblesort>}></Route>
         <Route path='stack' element={<StackPage></StackPage>}></Route>
+        <Route path='snake' element={<SnakeGame></SnakeGame>}></Route>
 
       </Route>
 
