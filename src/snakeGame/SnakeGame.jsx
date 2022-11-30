@@ -2,6 +2,7 @@
 import userEvent from "@testing-library/user-event";
 import React, { useEffect, useRef } from "react";
 import { useState } from "react";
+import { useFetcher } from "react-router-dom";
 export default function SnakeGame() {
   const canvasRef = useRef();
   const [snake, setSnake] = useState([
@@ -50,50 +51,49 @@ export default function SnakeGame() {
     }
   };
   const ref = useRef(null);
+  const appleRef = useRef();
+  appleRef.current = [300, 300];
   const setupFruit = () => {
     setApple(() => {
-      return [Math.round(Math.random() * 40) * 10, Math.round(Math.random() * 40) * 10];
+      let temp = [Math.round(Math.random() * 40) * 10, Math.round(Math.random() * 40) * 10];
+      return temp;
     });
+    // appleRef.current = [Math.round(Math.random() * 40) * 10, Math.round(Math.random() * 40) * 10];
   };
   const setUpPoint = () => {
-    snake.map((item) => {
-      if (item[0] === apple[0] && item[1] === apple[1]) {
-        console.log('go here')
-        setupFruit();
-        setSnake(() => {
-          let temp = [...snake];
-          temp.push(apple);
-          return temp;
-        });
-        return setScore(() => {
-          let temp = score;
-          temp += 1;
-          return temp;
-        });
-      }
-    });
+    if (snake[0][0] === apple[0] && snake[0][1] === apple[1]) {
+      setSnake(() => {
+        let temp = [...snake];
+        temp.push(apple);
+        return temp;
+      });
+      setScore(() => {
+        let temp = score;
+        temp += 1;
+        return temp;
+      });
+      return setupFruit();
+    } else {
+    }
   };
   useEffect(() => {
     setDirection("straight");
     let context;
     context = canvasRef.current.getContext("2d");
     context.clearRect(0, 0, window.innerWidth, window.innerHeight);
-    // context.setTransform(40, 0, 0, 40, 0, 0);
     snake.map((item, index) => {
       context.fillStyle = `${index === 0 ? "blue" : "green"}`;
       context.fillRect(item[1], item[0], 10, 10);
     });
-    setUpPoint();
-
     const fruit = canvasRef.current.getContext("2d");
     fruit.fillStyle = "red";
-    fruit.fillRect(apple[0], apple[1], 10, 10);
+    fruit.fillRect(apple[1], apple[0], 10, 10);
     start &&
       setTimeout(() => {
         goStraight();
       }, 50);
+    setUpPoint();
   }, [snake, apple, score, start]);
-  //   useEffect(() => {}, [snake, start, score]);
 
   const goStraight = () => {
     setSnake(() => {
@@ -150,6 +150,7 @@ export default function SnakeGame() {
       temp.unshift(firstTemp);
       return temp;
     });
+    setUpPoint();
   };
 
   return (
@@ -157,13 +158,22 @@ export default function SnakeGame() {
       <h1 className="w-full">Your score : {score}</h1>
       <canvas id="myCanvas" width={400} height={400} ref={canvasRef} style={{ border: "1px solid #000000" }} onKeyDown={handleKeyDown} />
       <div>
-        <div className="flex flex-col">
+        <div className="flex flex-col gap-5">
           <button
+            className="text-xl bg-rose-400 p-5 rounded-md  text-white hover:bg-rose-900 delay-75 duration-100"
             onClick={() => {
               setStart(true);
             }}
           >
             start
+          </button>
+          <button
+            className="text-xl bg-rose-400 p-5 rounded-md  text-white hover:bg-rose-900 delay-75 duration-100"
+            onClick={() => {
+              setStart(false);
+            }}
+          >
+            stop
           </button>
         </div>
       </div>
