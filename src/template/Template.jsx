@@ -1,4 +1,3 @@
-import { Carousel, Dropdown } from "flowbite-react";
 import React from "react";
 import { Link, NavLink, Outlet } from "react-router-dom";
 
@@ -54,7 +53,6 @@ export default function Template() {
           </div>
         </div>
       </nav>
-
       <div>
         <Outlet></Outlet>
       </div>
